@@ -125,14 +125,41 @@
   </dialog>
   <noscript>This interactive guide needs JavaScript enabled in your browser.</noscript>
   <script>
+    // Shared topic catalogue.
+    const groups = [
+      {"title":"Desire & integrity","topics":["sex-lust","pornography","secret-habits","self-control"]},
+      {"title":"Relationships & home","topics":["relationships","dating","marriage","family","fatherhood"]},
+      {"title":"Work & resources","topics":["ambition","money","purpose"]},
+      {"title":"Attention & influence","topics":["phone-content","comparison","friendships"]},
+      {"title":"Inner life & escape","topics":["anger","pride-ego","serving","isolation","substances-escape"]},
+      {"title":"Rest & life with God","topics":["rest","prayer","spiritual-discipline","discipline"]}
+    ];
     const topics = [
-      { id:'relationships', title:'Relationships & access', open:'Who gets access to me, and what does healthy closeness look like?', prompts:['What kind of trust do I want to build in this relationship?', 'What helps me keep my dignity, honesty and freedom to choose?', 'When do I feel pressed to share or agree before I’m ready?', 'What will I share, with whom, and at what pace?'], close:'Make room for trust to grow at a pace that respects your choices.' },
-      { id:'serving', title:'Serving & people-pleasing', open:'Which yes is costing me an honest no?', prompts:['What would serving with joy and integrity look like for me?', 'What commitments and time for rest need protecting?', 'Whose disappointment am I trying to avoid when I say yes?', 'What can I say to give myself time to consider the request?'], close:'Make room to give an honest answer and offer what you can sustain.' },
-      { id:'comparison', title:'Comparison & digital life', open:'What is shaping how I see myself when I scroll?', prompts:['What would contentment and a clearer sense of who I am in God look like online?', 'What deserves my attention and what helps me keep my peace?', 'Which online habits leave me comparing my life with someone else’s?', 'What will I mute, limit or replace this week?'], close:'Make room for contentment where comparison has been taking up your attention.' },
-      { id:'rest', title:'Rest & capacity', open:'What am I afraid might happen if I stop?', prompts:['What rhythm would leave me able to rest and be present?', 'What does rest protect in my health and relationships?', 'What do I treat as urgent even when it can wait?', 'What time can I protect for rest, and who needs to know?'], close:'Make room for rest you can count on.' },
-      { id:'ambition', title:'Worth & ambition', open:'Where am I asking achievement to tell me who I am?', prompts:['What would doing good work with purpose and integrity look like?', 'What should remain protected even when the work goes well?', 'When does comparison or pressure to prove myself start driving my choices?', 'What limit will help me work faithfully and stop when I need to?'], close:'Make room for the commitments that matter when the work is done.' },
-      { id:'prayer', title:'Prayer & private life', open:'What is my life with God becoming when no one is watching?', prompts:['What would an honest, steady life of prayer look like this week?', 'What time and attention do I want to give to being with God?', 'What part do hurry, distraction or the pressure to appear spiritual play?', 'What simple prayer rhythm can I protect this week?'], close:'Make room to be present with God in prayer.' },
-      { id:'open', title:'Open conversation', open:'Where is a boundary being tested right now?', prompts:['What fruit do I want to cultivate here?', 'What needs to be honoured or protected?', 'What repeatedly weakens or competes with that value?', 'What specific choice can I make to protect it?'], close:'Name what your boundary will make room for.' }
+      {"id":"sex-lust","title":"Sex & Lust","open":"What is desire teaching you to pursue?","prompts":["What would healthy, God-honouring sexuality look like?","What is sacred about your body and another person?","When does desire begin to turn a person into an object?","What practical line protects purity, dignity and love?"],"close":"Make room for desire guided by honour, dignity and love."},
+      {"id":"pornography","title":"Pornography","open":"What does the screen promise—and what does it take?","prompts":["What would freedom, honesty and healthy intimacy look like?","What must be honoured in your mind, body and relationships?","What situations make secrecy and escape feel attractive?","What access, habit or secrecy needs to change?"],"close":"Make room for honesty, freedom and real intimacy."},
+      {"id":"secret-habits","title":"Secret Habits","open":"What grows stronger when nobody can see it?","prompts":["What would an integrated public and private life look like?","What does honesty protect in your walk with God?","What keeps the habit hidden and repeated?","What specific step brings truth and support into this area?"],"close":"Make room for honesty in the parts of life no one else sees."},
+      {"id":"self-control","title":"Self-Control","open":"Who is leading when your impulses speak?","prompts":["What would a Spirit-led response look like under pressure?","What conviction deserves more weight than the urge?","When are you most likely to abandon that conviction?","What pause, limit or replacement response can you practise?"],"close":"Make room to respond with self-control when you feel the pull to react."},
+      {"id":"relationships","title":"Women & Relationships","open":"Does the way you relate communicate honour?","prompts":["What would truthful, respectful relationships look like?","How do dignity, agency and clarity shape your choices?","Where do entitlement, ambiguity or objectification enter?","What line would make your intentions and conduct honourable?"],"close":"Make room for relationships marked by respect, clear intentions and dignity."},
+      {"id":"dating","title":"Dating","open":"Are your intentions as clear as your attention?","prompts":["What kind of relationship are you seeking to build?","What must honesty, faith and mutual respect protect?","Where are pressure or mixed signals leading the relationship?","What conversation or agreed limit is needed now?"],"close":"Make room for honesty about where the relationship is going."},
+      {"id":"marriage","title":"Marriage","open":"What does your marriage receive after everything else?","prompts":["What would faithful, attentive love look like at home?","What protects trust, safety and connection?","What quietly competes with those commitments?","What shared rhythm or personal decision would protect them?"],"close":"Make room for the trust and connection you want in your marriage."},
+      {"id":"family","title":"Family","open":"Who gets your best—and who gets what is left?","prompts":["What atmosphere should your family experience around you?","What must be protected for love and trust to grow?","What patterns make home tense, distant or unpredictable?","What will you begin, stop or make dependable?"],"close":"Make room for your family to experience your attention and care."},
+      {"id":"fatherhood","title":"Fatherhood","open":"What are the children learning from your presence?","prompts":["What kind of fatherly presence do you want the children in your life to experience?","What do attention, patience and consistency protect?","What steals your availability or shapes your reactions?","What dependable action will communicate love this week?"],"close":"Make room for your children to experience your patience and presence."},
+      {"id":"ambition","title":"Work & Ambition","open":"When does ambition take what it was never entitled to?","prompts":["What kind of person should your work be helping you become?","What matters more than success?","When does achievement begin to cost you your character?","What should work never have unrestricted access to?"],"close":"Make room for what deserves your attention when work is done."},
+      {"id":"money","title":"Money","open":"What does your money reveal about your trust?","prompts":["What would faithful, generous and responsible living look like?","What commitments deserve protection before appearances?","Where do comparison, impulse or secrecy shape spending?","What limit or transparent practice would honour those commitments?"],"close":"Make room for generosity and the commitments your money needs to serve."},
+      {"id":"purpose","title":"Purpose","open":"Are you pursuing a calling—or proving your worth?","prompts":["Who are you becoming through what you pursue?","What convictions must remain intact along the way?","What distractions or comparisons pull you away?","What will you decline so you can respond faithfully?"],"close":"Make room to act faithfully on what you believe God is asking of you."},
+      {"id":"phone-content","title":"Phone & Content","open":"What is discipling you through your screen?","prompts":["What should your attention be producing in you?","What deserves your undivided attention?","What content or habit competes for that attention?","What digital boundary will protect it in daily life?"],"close":"Make room to give your attention to what deserves it."},
+      {"id":"comparison","title":"Social Media","open":"Whose approval is shaping your next move?","prompts":["What would a free and truthful digital life look like?","What protects contentment, integrity and attention?","How do comparison and reaction reshape your desires?","What account, rhythm or posting habit needs a limit?"],"close":"Make room for contentment when comparison demands your attention."},
+      {"id":"friendships","title":"Friendships","open":"Who can tell you the truth and still stay close?","prompts":["What kind of friendship helps you grow toward God?","What do honesty, loyalty and wise counsel require?","What influence keeps you performing or compromising?","What access should deepen—and what influence needs a limit?"],"close":"Make room for friends who can tell you the truth and stay close."},
+      {"id":"anger","title":"Anger","open":"What happens to others when you feel challenged?","prompts":["What would strength governed by gentleness look like?","What must remain safe when you disagree?","What thoughts or triggers escalate your response?","What will you do before anger becomes harmful action?"],"close":"Make room to disagree without losing gentleness or respect."},
+      {"id":"pride-ego","title":"Pride / Ego","open":"What becomes difficult when you need to be right?","prompts":["What would humble confidence look like?","What do truth, teachability and service protect?","When does protecting your image outweigh hearing the truth?","What practice will make correction welcome?"],"close":"Make room to hear the truth when it is hard to take."},
+      {"id":"serving","title":"People-Pleasing","open":"Which yes is costing you an honest no?","prompts":["What would loving others with honesty look like?","What responsibilities and limits need to be honoured?","Whose disappointment feels impossible to tolerate?","What clear, kind answer do you need to give?"],"close":"Make room for a kind, honest answer even when it disappoints someone."},
+      {"id":"isolation","title":"Isolation","open":"Who knows how you are really doing?","prompts":["What would honest, dependable connection look like?","What do trusted friendships protect in your life?","What shame, fear or habit keeps you unreachable?","What regular contact will you commit to?"],"close":"Make room for someone to know how you are really doing."},
+      {"id":"substances-escape","title":"Substances / Escape","open":"Where do you go when you do not want to feel?","prompts":["What would facing life with support and clarity look like?","What needs care beneath the urge to escape?","What situations repeatedly pull you toward numbing?","What access needs a limit—and what support needs an opening?"],"close":"Make room to face what you have been avoiding with support."},
+      {"id":"rest","title":"Rest","open":"What are you afraid will happen if you stop?","prompts":["What would a sustainable rhythm of work and rest look like?","What do your health, relationships and trust in God require?","What makes constant availability feel necessary?","What time will you protect for genuine rest?"],"close":"Make room for rest you can count on."},
+      {"id":"prayer","title":"Prayer","open":"Does God receive your presence or only your requests?","prompts":["What would a growing life of communion with God look like?","What place should attention and honesty have with Him?","What consistently displaces time with God?","What simple, repeatable prayer rhythm will you protect?"],"close":"Make room to be present with God in prayer."},
+      {"id":"spiritual-discipline","title":"Spiritual Discipline","open":"What is your private life with God becoming?","prompts":["What fruit should your life with God be producing?","How will Scripture, prayer and obedience remain connected?","What turns a living relationship into a performance?","What practice can you begin faithfully and sustainably?"],"close":"Make room for Scripture, prayer and obedience to shape your week."},
+      {"id":"discipline","title":"Discipline","open":"What do your repeated choices make room for?","prompts":["What kind of person are your habits helping you become?","What conviction needs a dependable rhythm?","What breaks that rhythm when motivation fades?","What small decision can become a consistent practice?"],"close":"Make room for a rhythm you can keep when motivation fades."},
+      {"id":"open","title":"Open Conversation","open":"Where is the line being tested?","prompts":["What are we trying to cultivate here?","What must be valued, honoured or protected?","What threatens, weakens or competes with that value?","What boundary gives that outcome space to grow?"],"close":"Name what your boundary will make room for."}
     ];
 
     const scenes = ['Kingdom Living', 'Opening question', 'Faith and boundaries', 'Time, Space and Matter', 'The four questions', 'Choose a topic', 'Discussion', 'Reflection', 'Prayer'];
@@ -140,6 +167,7 @@
     const page = document.getElementById('page');
     const contents = document.getElementById('contents');
     let state = readLocation();
+    let topicMenu = 'groups';
     let lensTimer;
 
     function readLocation() {
@@ -172,6 +200,20 @@
       return `<dl class="teaching">${rows.map(([label, detail]) => `<div><dt>${label}</dt><dd>${detail}</dd></div>`).join('')}</dl>`;
     }
 
+    function topicMenuContent() {
+      const group = groups[Number(topicMenu)];
+      const entries = topicMenu === 'groups'
+        ? groups.map(({title}, index) => `<button data-topic-menu="${index}">${title}</button>`)
+        : (group ? group.topics.map(id => topics.find(item => item.id === id)) : topics.filter(item => item.id !== 'open'))
+          .map(({id,title}) => `<button data-topic="${id}">${title}</button>`);
+      return `${heading(group?.title ?? 'Where is the line being tested?')}
+        <div class="topic-grid">${entries.join('')}</div>
+        <div class="actions">
+          ${topicMenu === 'groups' ? '<button class="control" data-topic-menu="all">See every topic</button>' : '<button class="control" data-topic-menu="groups">All areas</button>'}
+          <button class="open-topic" data-topic="open">Let the room name it</button>
+        </div>`;
+    }
+
     function sceneContent() {
       const topic = currentTopic();
       switch (state.scene) {
@@ -199,9 +241,7 @@
             ['Boundary', 'What specific choice will protect it in practice?']
           ])}`;
         case 5:
-          return `${heading('Where is the line being tested?', 'Choose the topic that fits the conversation you want to have.')}
-            <div class="topic-grid">${topics.filter(item => item.id !== 'open').map(item => `<button data-topic="${item.id}">${item.title}</button>`).join('')}</div>
-            <button class="open-topic" data-topic="open">Bring your own topic</button>`;
+          return topicMenuContent();
         case 6:
           return `<section class="discussion"><nav class="stage-switch" aria-label="Discussion steps">${stages.map((stage, i) => `<button class="control" data-step="${i}"${i === state.step ? ' aria-current="step"' : ''}>${stage}</button>`).join('')}</nav><p class="eyebrow">${topic.title}${state.step ? ` · ${stages[state.step]}` : ''}</p>${heading(state.step ? topic.prompts[state.step - 1] : topic.open)}${state.step === 4 ? '<p class="quote">What will you do, and when will you start?</p>' : ''}</section>`;
         case 7:
@@ -240,6 +280,10 @@
     }
 
     function back() {
+      if (state.scene === 5 && topicMenu !== 'groups') {
+        topicMenu = 'groups';
+        return show(5);
+      }
       if (state.scene === 6 && state.step > 0) return show(6, state.step - 1);
       if (state.scene === 7) return show(6, stages.length - 1);
       if (state.scene > 0) show(state.scene - 1);
@@ -252,10 +296,14 @@
     document.addEventListener('click', event => {
       const button = event.target.closest('button');
       if (!button) return;
-      const {scene, topic, step} = button.dataset;
+      const {scene, topic, step, topicMenu: menu} = button.dataset;
       if (scene !== undefined) {
         if (contents.open) contents.close();
+        if (Number(scene) === 5) topicMenu = 'groups';
         show(Number(scene));
+      } else if (menu !== undefined) {
+        topicMenu = menu;
+        show(5);
       } else if (topic !== undefined) {
         show(6, 0, topic);
       } else if (step !== undefined) {
